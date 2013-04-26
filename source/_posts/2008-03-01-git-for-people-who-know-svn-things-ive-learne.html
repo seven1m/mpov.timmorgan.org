@@ -1,0 +1,10 @@
+---
+layout: post
+title: Git For People Who Know Svn (Things I've Learned, Part 1)
+tags: []
+status: publish
+type: post
+published: true
+meta: {}
+---
+First, the mental hurdles:You don't need a server to have a git repository. All your commit history is available locally and quickly, with simple commands. Same with branches and tags. Git "checkout" and "commit" are commands you run locally. Svn "checkout" and "commit" are really more like "pull" and "push" with git.Now, the commands:<code>rails myapp &amp;&amp; cd myapp &amp;&amp; git init &amp;&amp; git add . &amp;&amp; git commit -a</code> creates a repo and makes the first commit (but still nothing is sent to any server; all work is done locally in your own repository)<code>echo "my app rocks" &gt; README &amp;&amp; git add README &amp;&amp; git commit -a</code> makes another commit<code>git rm path/to/remove &amp;&amp; git commit -a</code><code>git reset --hard HEAD</code> returns your repo to last committed state (cancels working changes) I'm still fighting with this one. It seems the best way might be to do a <code>git checkout -f</code> instead.That's it for the first part. Part 2 will be next.
