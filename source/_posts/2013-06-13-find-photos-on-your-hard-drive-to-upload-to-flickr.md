@@ -24,7 +24,7 @@ It's built as a web app with Sinatra, but it's **not meant to run on a server** 
 
 Here's how it works:
 
-1. Launch the Ruby app and open your browser to [localhost:3000](http://localhost:3000).
+1. Launch the Ruby app and open your browser to localhost:3000.
 2. Navigate to a folder that contains photos.
 3. Flickr Upload Set makes some calls to the Flickr API to search for photos with the same name under your account.
 4. Files found on Flickr are grayed out on the screen.
