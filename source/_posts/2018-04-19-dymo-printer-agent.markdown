@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dymo Printer Agent"
+title: "Dymo Printer Agent for Linux"
 tags:
 - ruby
 - dymo
