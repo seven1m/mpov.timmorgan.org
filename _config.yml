@@ -4,10 +4,10 @@
 
 url: http://mpov.timmorgan.org
 title: MPOV
-subtitle: occasional posts about programming, tech, and the dreaded etcetera
+subtitle: my point of view (programming stuff mostly)
 author: Tim Morgan
-author_url: http://timmorgan.org
-simple_search: http://google.com/search
+author_url: https://timmorgan.org
+simple_search: https://google.com/search
 description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
