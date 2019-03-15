@@ -14,7 +14,7 @@ Recently I switched to the [Sway](https://swaywm.org/) window manager on
 [my favorite laptop](http://seven1m.sdf.org/opinion/my_favorite_dev_laptop.html)
 and realized that [ClipIt](https://github.com/CristianHenzel/ClipIt) does not work there.
 I was reminded of an old
-[Ruby script I wrote](https://mpov.timmorgan.org/super-simplesource/_posts/2019-03-14-clipboard-history-in-sway-window-manager.markdown-clipboard-history-for-linux/)
+[Ruby script I wrote](https://mpov.timmorgan.org/super-simple-clipboard-history-for-linux/)
 way back in 2012 to serve this purpose.
 
 Time to dust that thing off and make it work with Wayland! I installed the excellent
