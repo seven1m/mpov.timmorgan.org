@@ -29,7 +29,7 @@ But that didn't stop me from doing and learning!
 
 ### First, an Interpreter
 
-In 2011, I started work on simple interpreter for a made-up language called "Airball." You can tell from the name
+In 2011, I started work on a simple interpreter for a made-up language called "Airball." You can tell from the name
 how much confidence I had in myself to make it work. It was a fairly simple program written in Ruby that
 parsed the code and walked the [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST).
 Once I realized it did kind of work, I renamed it [Lydia](https://github.com/seven1m/lydia) and rewrote it in C
