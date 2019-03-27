@@ -186,4 +186,4 @@ With the Mal guide and your ingenuity, you can do it. If I can do it, so can you
 
 ## Thanks
 
-Many thanks to Joel Martin for crating Mal and giving it to the world!
+Many thanks to Joel Martin for creating Mal and giving it to the world!
