@@ -4,9 +4,9 @@ require "stringex"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
-ssh_user       = "mpov"
+ssh_user       = "deploy@timmorgan.org"
 ssh_port       = "22"
-document_root  = "~/blog/"
+document_root  = "/var/www/statics/mpov.timmorgan.org"
 rsync_delete   = true
 rsync_args     = ""  # Any extra arguments to pass to rsync
 deploy_default = "rsync"
