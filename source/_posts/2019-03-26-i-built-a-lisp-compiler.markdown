@@ -10,7 +10,7 @@ categories:
 
 I'm very proud to announce the completion of my first programming language compiler!
 
-**[Malcc](https://git.sr.ht/~tim/malcc) is an incremental and ahead-of-time lisp compiler written in C.**
+**[Malcc](https://github.com/seven1m/malcc) is an incremental and ahead-of-time lisp compiler written in C.**
 
 <asciinema-player src="/asciicasts/malcc1.cast" rows="15" autoplay="yes" loop="yes"></asciinema-player>
 
