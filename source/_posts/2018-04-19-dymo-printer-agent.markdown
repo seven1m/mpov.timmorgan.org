@@ -9,6 +9,8 @@ date: 2018-04-19 21:55:37 -0500
 categories: 
 ---
 
+**Note: We no longer use this. I have an [updated post](/using-a-raspberry-pi-as-a-planning-center-check-ins-printer-station/) for the new setup.**
+
 Our church uses iPads and Dymo printers for children check-in. Parents check in their child, a label prints on the
 printer, and they stick the label on the child's shirt. We use Planning Center Check-ins of course, and it's great!
 
