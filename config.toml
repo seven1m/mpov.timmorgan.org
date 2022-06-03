@@ -1,0 +1,11 @@
+baseURL = 'https://mpov.timmorgan.org/'
+languageCode = 'en-us'
+title = 'My Point of View'
+theme = 'mini'
+[params]
+  avatarLink = '/'
+  bio = 'technology, programming, and rants (not necessarily in that order)'
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

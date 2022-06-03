@@ -1,0 +1,11 @@
+<header class="profile">
+  <a href="{{ .Site.Params.avatarLink }}">
+    <img class="avatar" alt="avatar" src="{{ "/images/avatar.svg" | relURL }}" style="height:80px" />
+  </a>
+
+  <h1>{{ .Site.Title }}</h1>
+   
+  {{ with .Site.Params.Bio }}
+    <h2>{{ . | markdownify }}</h2>
+  {{ end }}
+</header>
