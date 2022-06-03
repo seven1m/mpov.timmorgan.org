@@ -1,0 +1,33 @@
+<!doctype html><html lang=en-us><head><title>Find &amp;amp; Replace in Word with Ruby | My Point of View</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="You can script Microsoft Word using COM and the Ruby win32ole library.
+First, create a plain Word document with text to replace like this:
+Here is some text of my document. This will be replaced with [name]. Today&rsquo;s date is: [date].
+Then, run the following code. The text in square brackets will be replaced with the values in the code, and the file will be saved as a new name."><meta name=generator content="Hugo 0.100.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.ico type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>Find &amp;amp; Replace in Word with Ruby</h1><div class=tip><time datetime="2007-11-12 00:00:00 +0000 UTC">Nov 12, 2007</time>
+<span class=split>·</span>
+<span>132 words</span>
+<span class=split>·</span>
+<span>1 minute read</span></div><div class=content><p>You can script Microsoft Word using COM and the Ruby <code>win32ole</code> library.</p><p>First, create a plain Word document with text to replace like this:</p><blockquote><p>Here is some text of my document. This will be replaced with [name]. Today&rsquo;s date is: [date].</p></blockquote><p>Then, run the following code. The text in square brackets will be replaced with the values in the code, and the file will be saved as a new name.</p><pre tabindex=0><code>require &#39;win32ole&#39;
+word = WIN32OLE.new(&#39;Word.Application&#39;)
+#word.Visible = true # uncomment if you want to see it happen
+doc = word.Documents.Open(&#39;c:\file_to_open.doc&#39;)
+
+replacements = {
+  &#39;name&#39; =&gt; &#39;Tim Morgan&#39;,
+  &#39;date&#39; =&gt; Date.today.strftime(&#39;%B %d, %Y&#39;)
+}
+
+replacements.each do |key, value|
+  word.Selection.HomeKey(unit=6) # start at beginning
+  find = word.Selection.Find
+  find.Text = &#34;[#{key}]&#34; # text must be in square brackets
+  while word.Selection.Find.Execute
+    word.Selection.TypeText(text=value)
+  end
+end
+
+doc.SaveAs(&#39;c:\output_file.doc&#39;)
+doc.Close
+</code></pre></div></section></main><footer id=footer><div class=copyright>© Copyright
+2022
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>

@@ -1,0 +1,41 @@
+<!doctype html><html lang=en-us><head><title>Authority on Rails (Gem for Declaring User Authorization) | My Point of View</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="CanCan is a wonderful plugin for Rails that allows you to define all your authorization logic in one place. For small apps, it works well. But as my app&rsquo;s authorization needs grew more complex, I realized I needed a different approach to declaring and testing authorization.
+So I went looking&mldr; It turns out that the Authority gem is exactly what I was looking for:
+Authority splits out auth logic into individual &ldquo;Authorizers&rdquo;."><meta name=generator content="Hugo 0.100.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.ico type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>Authority on Rails (Gem for Declaring User Authorization)</h1><div class=tip><time datetime="2013-07-09 00:00:00 +0000 UTC">Jul 9, 2013</time>
+<span class=split>·</span>
+<span>381 words</span>
+<span class=split>·</span>
+<span>2 minute read</span></div><div class=content><p><a href=https://github.com/ryanb/cancan target=_blank rel=noopener>CanCan</a> is a wonderful plugin for Rails that allows you to define all your authorization logic in one place. For small apps, it works well. But as my app&rsquo;s authorization needs grew more complex, I realized I needed a different approach to declaring and testing authorization.</p><p>So I went looking&mldr; It turns out that the <a href=https://github.com/nathanl/authority target=_blank rel=noopener>Authority</a> gem is exactly what I was looking for:</p><ul><li>Authority splits out auth logic into individual &ldquo;Authorizers&rdquo;. Each one handles authorization for a single model (or multiple models that behave the same way), with individual methods for each action.</li><li>Authority doesn&rsquo;t try to do too much &ndash; it gives you an organized way to check authorization in regular Ruby code, explicitly, without having to write implicit rules.</li></ul><p>For our app, authorization got much simplified with regular &ldquo;if&rdquo; statements (compare to <a href=https://github.com/churchio/onebody/blob/8c295727388a8ff3392d21301226b3726e7694b4/app/models/ability.rb#L36-L47 target=_blank rel=noopener>this</a>):</p><p>{% codeblock AlbumAuthorizer lang:ruby %}
+class AlbumAuthorizer &lt; ApplicationAuthorizer
+def readable_by?(user)
+# belongs to me
+if resource.owner == user
+true
+# belongs to a friend
+elsif Person === resource.owner and user.friend_ids.include?(resource.owner.id)
+true
+# belongs to a group I&rsquo;m in
+elsif Group === resource.owner and user.member_of?(resource.owner)
+true
+# is marked public
+elsif resource.is_public?
+true
+# I&rsquo;m an admin
+elsif user.admin?(:manage_pictures)
+true
+end
+end
+end
+{% endcodeblock %}</p><p>I like having my authorization logic split into separate classes &ndash; it seems to be a cleaner approach.</p><p>Also, you can have one authorizer depend on another, like so:</p><p>{% codeblock PictureAuthorizer lang:ruby %}
+class PictureAuthorizer &lt; ApplicationAuthorizer
+def readable_by?(user)
+# ask the resource&rsquo;s parent &ldquo;album&rdquo; if this user can read it
+resource.album.readable_by?(user)
+end
+end
+{% endcodeblock %}</p><p>Now, there&rsquo;s a lot that Authority does <em>not</em> do:</p><ul><li>Authority doesn&rsquo;t build SQL for you. Unlike CanCan&rsquo;s <a href=https://github.com/ryanb/cancan/wiki/Fetching-Records target=_blank rel=noopener>accessible_by</a>, Authority doesn&rsquo;t give you a way to query all records accessible by the user. Our solution was to <a href=https://github.com/churchio/onebody/blob/ef7f1ab9ea62df0b502b389686a0ca9e339a0ea5/app/authorizers/album_authorizer.rb#L49-L62 target=_blank rel=noopener>build that SQL ourselves</a>, which isn&rsquo;t difficult.</li><li>Authority doesn&rsquo;t give you a way to load and authorize your resources in your controllers. For that, I built <a href=https://github.com/seven1m/load_and_authorize_resource target=_blank rel=noopener>load_and_authorize_resource</a> as a more generic solution. (More about that in the next blog post.)</li></ul><p>&mldr;with these things absent, Authority has a narrow job that it does very well.</p><p>CanCan is still a wonderful tool that I will likely use on a future project, but Authority takes a different approach and is a great tool to have in the toolbelt!</p></div><div class=tags><a href=https://mpov.timmorgan.org/tags/rails>rails</a>
+<a href=https://mpov.timmorgan.org/tags/plugin>plugin</a>
+<a href=https://mpov.timmorgan.org/tags/rest>rest</a></div></section></main><footer id=footer><div class=copyright>© Copyright
+2022
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>

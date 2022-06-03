@@ -1,0 +1,22 @@
+<!doctype html><html lang=en-us><head><title>Dymo Printer Agent for Linux | My Point of View</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Note: We no longer use this. I have an updated post for the new setup.
+Our church uses iPads and Dymo printers for children check-in. Parents check in their child, a label prints on the printer, and they stick the label on the child&rsquo;s shirt. We use Planning Center Check-ins of course, and it&rsquo;s great!
+One downside to Dymo printers, however, is that their software only runs on Mac and Windows, necessitating a full computer connected to the printer."><meta name=generator content="Hugo 0.100.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.ico type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>Dymo Printer Agent for Linux</h1><div class=tip><time datetime="2018-04-19 21:55:37 -0500 -0500">Apr 19, 2018</time>
+<span class=split>·</span>
+<span>291 words</span>
+<span class=split>·</span>
+<span>2 minute read</span></div><div class=content><p><strong>Note: We no longer use this. I have an <a href=/using-a-raspberry-pi-as-a-planning-center-check-ins-printer-station/>updated post</a> for the new setup.</strong></p><p>Our church uses iPads and Dymo printers for children check-in. Parents check in their child, a label prints on the
+printer, and they stick the label on the child&rsquo;s shirt. We use Planning Center Check-ins of course, and it&rsquo;s great!</p><p>One downside to Dymo printers, however, is that their software only runs on Mac and Windows, necessitating a full
+computer connected to the printer. (There&rsquo;s no way that I know of to hook the Dymo printer directly to the iPad.)</p><p>I had the idea to use a Raspberry Pi as the computer instead of a full desktop machine. The setup looks something
+like this:</p><pre tabindex=0><code>iPad -[wireless network]-&gt; Raspberry Pi -[usb]-&gt; Dymo printer
+</code></pre><p>Great idea! Unfortunately, the labels are sent as a string of XML to a small Dymo tray application which converts
+them to PDFs. This Dymo tray application does not run on Linux. <em>Womp womp.</em></p><p><strong>This can&rsquo;t be too hard&mldr;</strong> (Many weekends have been ruined by that short phrase.) We&rsquo;ll just write our own
+XML->PDF conversion program in Ruby!</p><p>The result is: <a href=https://github.com/seven1m/dymo-printer-agent target=_blank rel=noopener>dymo-printer-agent</a></p><p>This little application runs on Linux (in my case, a Raspberry Pi running Raspbian) and converts Dymo&rsquo;s label XML
+format into PDF and sends it to the printer driver.</p><p>It works great!</p><p>So, if you&rsquo;re in the odd situation of wanting to print to a Dymo label printer on Linux, this project might be
+useful to you! I&rsquo;ve tried to include all the relevant gotchas and instructions in the readme, so check it out.</p><p><em>Meta note: I dusted off the ol&rsquo; blog to post about this project, because I&rsquo;m no longer on Twitter. I&rsquo;ll talk about
+that decision in another blog post.</em></p></div><div class=tags><a href=https://mpov.timmorgan.org/tags/ruby>ruby</a>
+<a href=https://mpov.timmorgan.org/tags/dymo>dymo</a>
+<a href=https://mpov.timmorgan.org/tags/printing>printing</a></div></section></main><footer id=footer><div class=copyright>© Copyright
+2022
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>
