@@ -1,0 +1,58 @@
+<!doctype html><html lang=en-us><head><title>I Built a Ruby Parser | My Point of View</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Sorry, this post will read like a &ldquo;dear diary&rdquo; entry rather than some life-changing HN-worthy guidance.
+Back in November 2020, almost on a whim I started work on a new parser for the Ruby programming language. It was almost exactly a year after I had started working on my compiler project (I hope to write a longer post about that someday soon), and in my frustration with the state of affairs with Ruby parsers available to a humble C/C++ programmer, I decided to see how hard it would be."><meta name=generator content="Hugo 0.100.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.ico type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>I Built a Ruby Parser</h1><div class=tip><time datetime="2022-06-04 17:50:00 -0500 -0500">Jun 4, 2022</time>
+<span class=split>·</span>
+<span>779 words</span>
+<span class=split>·</span>
+<span>4 minute read</span></div><div class=content><p><em>Sorry, this post will read like a &ldquo;dear diary&rdquo; entry rather than some
+life-changing <a href=https://news.ycombinator.com target=_blank rel=noopener>HN</a>-worthy guidance.</em></p><p>Back in November 2020, almost on a whim I started work on
+<a href=https://github.com/natalie-lang/natalie_parser target=_blank rel=noopener>a new parser</a>
+for the Ruby programming language. It was almost exactly a year after I had
+started working on <a href=https://github.com/natalie-lang/natalie target=_blank rel=noopener>my compiler project</a>
+(I hope to write a longer post about that someday soon), and in my frustration
+with the state of affairs with Ruby parsers available to a humble C/C++
+programmer, I decided to see how hard it would be.</p><h2 id=utter-failure>Utter Failure <a href=#utter-failure class=anchor>🔗</a></h2><p>Actually, the story starts about a month earlier when I thought I could make a
+Ruby parser using a Parsing Expression Grammar, which I made
+<a href="https://www.youtube.com/watch?v=5kGcuhDz4JA&list=PLWUx_XkUoGTrZFVEYGh6N7bmC60Eu5tjX" target=_blank rel=noopener>a series of videos about</a>.
+That project was a failure. It was slow, buggy&mldr; I mean <strong>very</strong> buggy.
+Also <strong>very</strong> slow. It was clear within a few weeks that it wasn&rsquo;t going to
+be good enough.</p><p>Somehow that experience didn&rsquo;t deter me. It just helped me realize this project
+would be beyond anything I had ever done, and I couldn&rsquo;t just &ldquo;figure it out&rdquo;
+as I&rsquo;m accustomed to doing.</p><h2 id=learning-stuff>Learning Stuff <a href=#learning-stuff class=anchor>🔗</a></h2><p>Then I read &lsquo;Writing an Interpreter In Go&rsquo;.</p><p><a href=https://interpreterbook.com/ target=_blank rel=noopener><p class=markdown-image><img src=/images/interpreterbook.png alt="Writing an Interpreter in Go book cover"></p></a></p><p>The book has a decent section about parsing and it taught me the
+<a href=https://en.wikipedia.org/wiki/Operator-precedence_parser#Pratt_parsing target=_blank rel=noopener>Pratt parsing</a>
+technique. Even though the book examples were in Go and I was writing C++,
+the technique carried over easily and I was able to get something that
+seemed like it would work for parsing Ruby in a few weeks.</p><p><a href="https://www.youtube.com/watch?v=oyBZD-WXJhc&list=PLWUx_XkUoGTqVaRuvBTrNRifscPrvrjMe" target=_blank rel=noopener>I made some videos</a>.
+I hacked on my parser off-and-on over the next several months.</p><h2 id=feeling-overwhelmed>Feeling Overwhelmed <a href=#feeling-overwhelmed class=anchor>🔗</a></h2><p><strong>Then I got discouraged.</strong> The amount of work ahead felt overwhelming and
+I wasn&rsquo;t sure if I could do it alone.</p><p>Open source can be a lonely hobby. In some ways, I relish the out-for-a-hike
+alone-ness of working on open source. It&rsquo;s full of personal challenges
+and triumphs and &mldr; often failures too. Not having someone who is there
+beside you can really make you wonder <em>Why am I even doing this?</em></p><img alt="closed pull requests on github" src=/images/prs_closed.png style=width:200px;float:right><p>So I put it aside for awhile and worked on <a href=https://github.com/natalie-lang/natalie/commit/a54964c17f8cd623ffb804653f623703d0fc0eaf target=_blank rel=noopener>other things</a>.
+Features that other people share a passion for and would help review.</p><img src=/images/stop-hand.svg style=width:50px;float:left;padding-right:10px><p>Aside: This happens a lot. I get bored, or frustrated, or overwhelmed with
+a particular project and I move on to something else. But if the hard thing
+is <em>worthy</em> then <em>something</em> will bring me back to work on it again.
+The time away is important for gaining perspective, I think.</p><h2 id=motivation>Motivation <a href=#motivation class=anchor>🔗</a></h2><p>Then I started chatting with <a href=https://twitter.com/kddnewton target=_blank rel=noopener>Kevin Newton</a>,
+a Ruby hacker who works on Ruby internals at Shopify, and he helped me get
+excited about the parser project again. It turns out there is real need for
+better Ruby parsing tools, and he&rsquo;s <a href=https://github.com/ruby-syntax-tree target=_blank rel=noopener>working on a few tools</a>
+himself.</p><p>My project wasn&rsquo;t just a vanity project! There&rsquo;s a chance it could be useful
+to the Ruby community as a whole. That somehow gave me the motivation I needed
+to get to work.</p><h2 id=hard-work>Hard Work <a href=#hard-work class=anchor>🔗</a></h2><p>So, for the next six months, I worked on the parser every day. Before work, I
+would get my coffee, sit with my dogs, and hack on the parser for an hour or so.</p><p><p class=markdown-image><img src=/images/dogs_laptop.jpg alt="dogs and a laptop"></p></p><p>It was soothing actually. Knowing I only had about an hour that day to get a
+feature working, or a bug fixed, or maybe just a test written, was freeing. I
+didn&rsquo;t have to finish the <em>project</em> &ndash; I just had to make some sort of progress.</p><p>Timeboxing works! (As it turns out.)</p><p>And so I did, little-by-little, make progress. Just a few days ago, after I gave
+myself permission to cut a bit of scope, I got the last of my unit tests passing
+and <a href=https://github.com/natalie-lang/natalie_parser/releases/tag/v1.0.0 target=_blank rel=noopener>I shipped a release</a>.</p><h2 id=where-does-it-go-from-here>Where does it go from here? <a href=#where-does-it-go-from-here class=anchor>🔗</a></h2><p>That&rsquo;s the whole story, so far! I don&rsquo;t know where this project will go in the
+long term. For now, the parser works for my needs &ndash; it parses the Ruby for
+<a href=https://github.com/natalie-lang/natalie target=_blank rel=noopener>our Ruby compiler</a>, and it does it
+<em>fast</em>. It&rsquo;s good enough for our needs, so if the story ends here, that&rsquo;s fine!</p><p>If the story ends here, then I made a cool thing that I am proud of. Something
+that does what it says on the tin, and does it well.</p><p>More than that, I completed something on my bucket list &ndash; something that I had
+long-ago decided was for rockstar programmers and academics who do a lot of
+reading and studying (that&rsquo;s certainly not me) &ndash; <strong>I wrote a parser!</strong>
+For a real language!</p><p>I&rsquo;m proud of myself. And I hope you find some inspiration to do that hard thing
+you&rsquo;ve been meaning to do, too!</p><p>Thanks for reading!</p></div><div class=tags><a href=https://mpov.timmorgan.org/tags/ruby>ruby</a>
+<a href=https://mpov.timmorgan.org/tags/parser>parser</a>
+<a href=https://mpov.timmorgan.org/tags/c++>c++</a></div></section></main><footer id=footer><div class=copyright>© Copyright
+2022
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>
