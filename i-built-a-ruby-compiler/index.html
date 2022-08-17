@@ -1,0 +1,245 @@
+<!doctype html><html lang=en-us><head><title>I Built a Ruby Compiler | My Point of View</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Note: Please don&rsquo;t share this on Hacker News &ndash; I don&rsquo;t need the grief from gatekeepers telling me I don&rsquo;t know how to write a compiler. This is an account for myself and for friends. /hugs
+I said in my previous post, I Built a Ruby Parser, that I would write about my ongoing compiler project Natalie, but I really wanted to finish the compiler rewrite first. I&rsquo;m proud to say the rewrite is finished!"><meta name=generator content="Hugo 0.101.0"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.png type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>I Built a Ruby Compiler</h1><div class=tip><time datetime="2022-08-16 06:25:00 -0500 -0500">Aug 16, 2022</time>
+<span class=split>·</span>
+<span>2474 words</span>
+<span class=split>·</span>
+<span>12 minute read</span></div><div class=content><p><em>Note: Please don&rsquo;t share this on Hacker News &ndash; I don&rsquo;t need the grief from gatekeepers
+telling me I don&rsquo;t know how to write a compiler. This is an account for myself and for
+friends. /hugs</em></p><p>I said in my previous post, <a href=https://mpov.timmorgan.org/i-built-a-ruby-parser target=_blank rel=noopener>I Built a Ruby Parser</a>,
+that I would write about my ongoing compiler project <a href=https://natalie-lang.org/ target=_blank rel=noopener>Natalie</a>,
+but I <em>really</em> wanted to finish the compiler rewrite first. I&rsquo;m proud to say the rewrite
+is finished! (More about that in a bit.)</p><p>But first, a bit of a journey&mldr;</p><h2 id=no-idea-what-im-doing>No Idea What I&rsquo;m Doing <a href=#no-idea-what-im-doing class=anchor>🔗</a></h2><p>You know <a href=https://knowyourmeme.com/memes/i-have-no-idea-what-im-doing target=_blank rel=noopener>that meme</a>
+with the dog at the keyboard? Yeah, that was me. I was alone on an airplane with
+some extra elbow room thanks to no center-seat passenger, and I found myself
+wondering <em>What would it take to compile a language that resembles Ruby?</em></p><p>Ruby is my favorite language, owing to it&rsquo;s syntax, flexibility, and lisp-like
+qualities. How much of that just isn&rsquo;t possible with a Ruby compiler?</p><p>Those first two commits were pretty humble:</p><ol><li><a href=https://github.com/natalie-lang/natalie/commit/487d5784ec9b7cf09b0b25f7d123e5971ccaf0de target=_blank rel=noopener>a woefully inadequate parser</a></li><li><a href=https://github.com/natalie-lang/natalie/commit/a77cd947dab5c2182b452177da28d79b217e0755 target=_blank rel=noopener>a code generator and a C template</a></li></ol><p>I honestly didn&rsquo;t think this experiment would go much of anywhere, but my
+curiosity drove me forward, and I thought I would just work on it
+for a few days more until I hit an immovable obstacle.</p><p>I <em>knew</em> there would be a brick wall lurking around any corner, and then I
+could say &ldquo;Ahhh, of course, <em>that&rsquo;s</em> why I shouldn&rsquo;t be doing this.&rdquo;</p><h2 id=but-it-was-just-so-much-fun>But it was just so much fun! <a href=#but-it-was-just-so-much-fun class=anchor>🔗</a></h2><p>And I did hit a few walls, but they weren&rsquo;t brick &ndash; they were some other
+material. Or I could go around them, or whatever. This metaphor is falling
+apart. :-)</p><p>Anyway&mldr; the obstacles were really more like mini challenges, and
+I just kept finding ways to overcome them. And with each breakthrough, that
+<a href="https://www.youtube.com/watch?v=HkExBV05_EY" target=_blank rel=noopener>xbox achievement unlocked sound</a>
+played in my head.</p><p><strong>I was having fun!</strong></p><p>Programming, for me, is better than any triple-A video game.
+Wielding a processor, which has been in development for many decades longer
+than the longest-lived video game, is more immersive, more challenging, and
+more rewarding!</p><p><a href="https://www.youtube.com/watch?v=tfZOnDpDVKw" target=_blank rel=noopener><p class=markdown-image><img src=/images/natalie_dec2019.jpg alt="me sitting in a hotel room talking about Natalie"></p></a></p><p><em>Me sitting in a hotel room, excitedly talking about Natalie, circa 2019.</em></p><p>I just kept going. I kept hacking in my spare time. I
+<a href="https://www.youtube.com/playlist?list=PLWUx_XkUoGTq-nkbhnk6PN4m109ISo5BX" target=_blank rel=noopener>recorded some videos</a>.</p><ul><li>I learned how to <a href=https://github.com/natalie-lang/natalie/commit/a8c30b356fde528e2ec8435b15a06553226600ce target=_blank rel=noopener>build a garbage collector</a>.</li><li>I learned how to <a href=/i-built-a-ruby-parser>build a parser</a>.</li><li>I learned how to <a href="https://www.youtube.com/watch?v=tK3pAxc1A6U" target=_blank rel=noopener>intern strings</a>.</li><li>I learned how to <a href="https://www.youtube.com/watch?v=FTA6_YAhnXk" target=_blank rel=noopener>use smart pointers to reduce heap allocations</a>.</li><li>I learned how to <a href=https://github.com/natalie-lang/natalie/commit/8fa8c576133f5d66ce3fcb22dce64a9e43f16560 target=_blank rel=noopener>self-host the compiler</a>.</li><li>I learned how to <a href="https://www.youtube.com/watch?v=3xhGxoPh6as" target=_blank rel=noopener>use a profiler</a>.</li><li>I learned how to <a href="https://www.youtube.com/watch?v=aQROCSukXsA" target=_blank rel=noopener>use Valgrind</a>.</li></ul><p>&mldr;and so many more little things throughout. I even built
+<a href=https://github.com/seven1m/tm target=_blank rel=noopener>my own data structures</a>.</p><h2 id=a-note-about-scaffolding>A Note About Scaffolding <a href=#a-note-about-scaffolding class=anchor>🔗</a></h2><p>I want to jump in now, dear reader, and point out that not all those pieces
+were strictly necessary to get a working compiler!</p><p>The compiler was working (for some definition of &ldquo;working&rdquo;) within days of my
+first commit, so it&rsquo;s not like I had to get parsing + string interning + GC +
+self-hosting + yada yada all working at once.</p><p>No, I lean heavily on scaffolding. <strong>I take whatever shortcuts I can</strong> to get
+something working. Seeing some valuable output right away gives a little
+dopamine hit and gives me the energy to keep going.</p><p>For example, my first parser was absolute trash. I realized I didn&rsquo;t want to
+spend precious time in the beginning on learning how to parse Ruby, so I built
+on top of the excellent <a href=https://github.com/seattlerb/ruby_parser target=_blank rel=noopener>ruby_parser</a>
+library.</p><p>I didn&rsquo;t know anything about garbage collection, so at first I
+<a href="https://www.youtube.com/watch?v=gthWRmT1qG4" target=_blank rel=noopener>integrated the Boehm garbage collector</a>.
+I didn&rsquo;t know how to implement a hashmap in C, so I used
+<a href=https://github.com/DavidLeeds/hashmap target=_blank rel=noopener>David Leeds&rsquo; hashmap library</a>.</p><p>And there are lots of little tricks like that. <strong>You just have to be a little lazy.</strong>
+Think of shortcuts to get where you want to go. Then, at some point down the road,
+you (or maybe even someone else) can come back, remove the scaffolding, and
+replace it with a beautiful pillar.</p><h2 id=the-first-natalie-compiler>The First Natalie Compiler <a href=#the-first-natalie-compiler class=anchor>🔗</a></h2><p>First, let me tell you how the first compiler worked. (I recently rewrote
+the compiler, and I&rsquo;ll talk about how the new compiler works in the next section.)</p><p>On that plane back in 2019, without any training or experience, I just
+tried to envision the shortest path from an Abstract Syntax Tree (AST) to C.
+(Natalie was original written in C and later converted to C++.)</p><p>Starting with code like:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>x <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>2</span>
+</span></span></code></pre></div><p>&mldr;which produces AST like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:lasgn</span>,
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>:x</span>,
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:call</span>,
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:lit</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>   <span style=color:#e6db74>:+</span>,
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:lit</span>, <span style=color:#ae81ff>2</span>))))
+</span></span></code></pre></div><p>&mldr;I squinted, and I thought I could see C/C++ in those S-expressions.
+So the first compiler just incrementally massaged the AST until it looked like
+the final output. So the compiler in one recursive pass over the AST, created
+a new AST that looked like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:var_set</span>,
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>:env</span>,
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:s</span>, <span style=color:#e6db74>:x</span>),
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:public_send</span>,
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:&#34;Value::integer&#34;</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:intern</span>, <span style=color:#e6db74>:+</span>),
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:args</span>, s(<span style=color:#e6db74>:&#34;Value::integer&#34;</span>, <span style=color:#ae81ff>2</span>)),
+</span></span><span style=display:flex><span>   <span style=color:#e6db74>&#34;nullptr&#34;</span>)))
+</span></span></code></pre></div><p>Then in another pass, it produced this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:var_alloc</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:declare</span>, <span style=color:#e6db74>&#34;x1&#34;</span>, s(<span style=color:#e6db74>:nil</span>)),
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:var_set</span>,
+</span></span><span style=display:flex><span>   <span style=color:#e6db74>&#34;env&#34;</span>,
+</span></span><span style=display:flex><span>   {<span style=color:#e6db74>:name</span><span style=color:#f92672>=&gt;</span><span style=color:#e6db74>&#34;x&#34;</span>, <span style=color:#e6db74>:index</span><span style=color:#f92672>=&gt;</span><span style=color:#ae81ff>0</span>, <span style=color:#e6db74>:var_num</span><span style=color:#f92672>=&gt;</span><span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>false</span>,
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:public_send</span>,
+</span></span><span style=display:flex><span>    s(<span style=color:#e6db74>:&#34;Value::integer&#34;</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>    s(<span style=color:#e6db74>:intern</span>, <span style=color:#e6db74>:+</span>),
+</span></span><span style=display:flex><span>    s(<span style=color:#e6db74>:args</span>, s(<span style=color:#e6db74>:&#34;Value::integer&#34;</span>, <span style=color:#ae81ff>2</span>)),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;nullptr&#34;</span>))))
+</span></span></code></pre></div><p>And yet again, another pass produced:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:var_alloc</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:declare</span>, <span style=color:#e6db74>&#34;x1&#34;</span>, s(<span style=color:#e6db74>:nil</span>)),
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:set</span>,
+</span></span><span style=display:flex><span>   <span style=color:#e6db74>&#34;x1&#34;</span>,
+</span></span><span style=display:flex><span>   s(<span style=color:#e6db74>:public_send</span>,
+</span></span><span style=display:flex><span>    s(<span style=color:#e6db74>:&#34;Value::integer&#34;</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>    s(<span style=color:#e6db74>:intern</span>, <span style=color:#e6db74>:+</span>),
+</span></span><span style=display:flex><span>    s(<span style=color:#e6db74>:args</span>, s(<span style=color:#e6db74>:&#34;Value::integer&#34;</span>, <span style=color:#ae81ff>2</span>)),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;nullptr&#34;</span>))))
+</span></span></code></pre></div><p>And finally, it walked that AST and produced a big string of C++ (again, this was
+originally C but later rewritten in C++) like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=display:flex><span>env<span style=color:#f92672>-&gt;</span>build_vars(<span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>Value x1 <span style=color:#f92672>=</span> Value { NilObject<span style=color:#f92672>::</span>the() };
+</span></span><span style=display:flex><span>Value args2[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> { Value<span style=color:#f92672>::</span>integer(<span style=color:#ae81ff>2</span>) };
+</span></span><span style=display:flex><span>Value call_result3 <span style=color:#f92672>=</span> Value<span style=color:#f92672>::</span>integer(<span style=color:#ae81ff>1</span>).public_send(env, symbols[<span style=color:#ae81ff>0</span>]<span style=color:#75715e>/*:+*/</span>, Args(<span style=color:#ae81ff>1</span>, args2), <span style=color:#66d9ef>nullptr</span>);
+</span></span><span style=display:flex><span>x1 <span style=color:#f92672>=</span> call_result3;
+</span></span></code></pre></div><p>I know that&rsquo;s quite a few steps, and I knew that some of those compiler passes
+could be condensed. But the point is it was easy to get started. It worked OK
+as &ldquo;Baby&rsquo;s First Compiler&rdquo;, so I went with it.</p><p>It worked pretty well, and it was fast enough, which is about all I cared about
+in those proof-of-concept, &ldquo;is this even a project I want to work on?&rdquo; days.</p><p>But the weaknesses of this approach became apparent with time:</p><ul><li>Adding optimization passes that work on the AST is difficult.</li><li>Compiler passes that manipulate AST are not easy to read.</li><li>Diffing the AST given from different compiler passes is hard.</li><li>And most importantly, the compiler would forever be a C++ generator.
+There was no hope for generating different backend code.</li></ul><p>I <a href="https://www.youtube.com/watch?v=px1AVr6nMWk" target=_blank rel=noopener>tried to make an interpreter VM</a>
+that would walk the AST generated by the compiler, and instead of writing C++,
+would interpret the instructions directly. <strong>That was next-to-impossible.</strong> Because
+the compiler generated a final AST that closely resembled the C++ we were generating,
+interpreting those instructions as Ruby just didn&rsquo;t work.</p><p>That&rsquo;s when I realized that the term I&rsquo;d heard before could be a valuable
+alternative: <strong>Intermediate Representation.</strong></p><h2 id=the-second-natalie-compiler>The Second Natalie Compiler <a href=#the-second-natalie-compiler class=anchor>🔗</a></h2><p>So in January 2022 I started rewriting the compiler. It had to have:</p><ul><li>An <a href=https://en.wikipedia.org/wiki/Intermediate_representation target=_blank rel=noopener>Intermediate Representation</a></li><li>Multiple backends: a C++ backend and an Interpreter (VM) backend</li></ul><p>I could take what I learned about compiling Ruby the first time, and of course
+our existing runtime C++ library of code could be used largely unmodified.</p><p>With my goals in mind, I decided to target the interpreter&mldr; What instructions
+would I want to iterate over, interpreting directly in Ruby? I settled on
+a <a href=https://en.wikipedia.org/wiki/Stack_machine target=_blank rel=noopener>stack machine</a> VM, so my instructions
+would push and pop from a stack.</p><p>And because I wanted a C++ backend as well, that meant those same instructions
+had to be able to generate C++.</p><p>There was a lot of trial-and-error during those first months. I pushed myself
+to build the interpreter VM and the C++ backend <strong>at the same time</strong>, so that I
+could be sure that the IR I was inventing didn&rsquo;t carry along any assumptions about
+what the backend might be.</p><p>I could tell pretty early on this was going to be a massive improvement!</p><p>So here&rsquo;s how the new compiler works:</p><ol><li><p>The first compiler pass takes AST that looks like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>s(<span style=color:#e6db74>:block</span>,
+</span></span><span style=display:flex><span> s(<span style=color:#e6db74>:call</span>,
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:lit</span>, <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>:+</span>,
+</span></span><span style=display:flex><span>  s(<span style=color:#e6db74>:lit</span>, <span style=color:#ae81ff>2</span>)))
+</span></span></code></pre></div><p>&mldr;and produces a flat array of IR instructions like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#&lt;Natalie::Compiler::VariableDeclareInstruction ...&gt;,</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#&lt;Natalie::Compiler::PushIntInstruction ...&gt;,</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#&lt;Natalie::Compiler::PushArgcInstruction ...&gt;,</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#&lt;Natalie::Compiler::PushIntInstruction ...&gt;,</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#&lt;Natalie::Compiler::SendInstruction ...&gt;,</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>#&lt;Natalie::Compiler::VariableSetInstruction ...&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>When we debug the IR, we print it like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div></li><li><p>Compiler pass 2 walks the IR to determine variable scope:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#f92672>==</span> SCOPE vars<span style=color:#f92672>=[</span>x <span style=color:#f92672>(</span>mine<span style=color:#f92672>)]</span> <span style=color:#f92672>==</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div></li><li><p>Pass 3 and 4 manipulate the IR further to handle Ruby&rsquo;s <code>break</code> and <code>return</code> semantics.
+In this example, nothing changes in the IR, so I won&rsquo;t paste the same thing again here.</p></li><li><p>Finally, depending on the backend chosen, we either walk those instructions with the VM
+and interpret them directly, or if we are generating C++, we &ldquo;interpret&rdquo; the instructions
+as C++:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=display:flex><span>Value x_var <span style=color:#f92672>=</span> NilObject<span style=color:#f92672>::</span>the();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>auto</span> send_1 <span style=color:#f92672>=</span> Value<span style=color:#f92672>::</span>integer(<span style=color:#ae81ff>1</span>).public_send(env, symbols[<span style=color:#ae81ff>0</span>]<span style=color:#75715e>/*:+*/</span>, Args({ Value<span style=color:#f92672>::</span>integer(<span style=color:#ae81ff>2</span>) }, false), <span style=color:#66d9ef>nullptr</span>);
+</span></span><span style=display:flex><span>x_var <span style=color:#f92672>=</span> send_1;
+</span></span></code></pre></div></li></ol><h3 id=converting-ir-to-c>Converting IR to C++ <a href=#converting-ir-to-c class=anchor>🔗</a></h3><p>I think it&rsquo;s fun to talk about how we convert IR to C++, so here is how that works. Let&rsquo;s step
+over the IR line-by-line and see what happens. I&rsquo;ll use <code>&lt;== HERE</code> so you know where we are:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x   &lt;<span style=color:#f92672>==</span> HERE
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div><p>This first (zeroth) instruction sets up a variable as nil. For reasons I&rsquo;d rather not go into,
+we have to ensure a certain edge case doesn&rsquo;t result in improper variable scoping. I would
+love to optimize this instruction out when we know that edge case isn&rsquo;t present. Anyway, that
+instruction generates very simple C++:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=display:flex><span>Value x_var <span style=color:#f92672>=</span> NilObject<span style=color:#f92672>::</span>the();
+</span></span></code></pre></div><p>Next:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>           &lt;<span style=color:#f92672>==</span> HERE
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div><p>This is where the stack comes into play. Prior to this instruction, the stack is empty.
+But after this instruction, the stack, which is just a Ruby array, looks like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;Value::integer(2)&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>Let&rsquo;s keep going:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>          &lt;<span style=color:#f92672>==</span> HERE
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div><p>This is very much like <code>push_int</code>, but it just pushes a plain Ruby integer
+onto the stack. I have ideas for removing the need for this instruction entirely,
+but for now, this is what it adds:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;Value::integer(2)&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>Moving right along:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>           &lt;<span style=color:#f92672>==</span> HERE
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div><p>OK, same story, push an integer onto the stack:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;Value::integer(2)&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;Value::integer(1)&#34;</span>,
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>Next:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+              &lt;<span style=color:#f92672>==</span> HERE
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x
+</span></span></code></pre></div><p>This is where it gets interesting! We need to pop some things off the stack and
+put it together for some new C++ code. So the steps taken for <code>send</code> are:</p><ol><li>Pop the &ldquo;receiver&rdquo; &ndash; the object that is being &ldquo;sent&rdquo; the message
+(basically Ruby, Smalltalk parlance for calling a method.)</li><li>Pop the argument count, which in this case is <code>1</code>.</li><li>Pop each argument (just 1 here).</li><li>Generate the send call!</li></ol><p>Those steps produce some more C++ for the final output:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>auto</span> send_1 <span style=color:#f92672>=</span> Value<span style=color:#f92672>::</span>integer(<span style=color:#ae81ff>1</span>).public_send(env, symbols[<span style=color:#ae81ff>0</span>]<span style=color:#75715e>/*:+*/</span>, Args({ Value<span style=color:#f92672>::</span>integer(<span style=color:#ae81ff>2</span>) }, false), <span style=color:#66d9ef>nullptr</span>);
+</span></span></code></pre></div><p>&mldr;and we push the result of this onto the stack. The fun part, and the part that
+gets me so excited about this approach, is that the &ldquo;result&rdquo; here is <strong>not</strong> the actual result
+of calling the method. No, we&rsquo;re still at compilation time here. The &ldquo;result&rdquo; is just a
+C++ variable called <code>send_1</code>. So we push that variable name onto the stack. Remember,
+everything else has already been popped off, leaving us with:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;send_1&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>And now we&rsquo;re at the last instruction:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#ae81ff>0</span> variable_declare x
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> push_int <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span> push_argc <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span> push_int <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> send :+
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span> variable_set x       &lt;<span style=color:#f92672>==</span> HERE
+</span></span></code></pre></div><p>This instruction pops the last result off the stack and generates C++:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>x_var <span style=color:#f92672>=</span> send_1;
+</span></span></code></pre></div><p>And that&rsquo;s it! I think that is the coolest thing I&rsquo;ve ever built. It gives
+me so much joy to see that in action! &lt;3</p><p>Yes, there are some inefficiencies there, such as setting the variable to
+<code>nil</code> before we set it for real. And we shouldn&rsquo;t have to set <code>send_1</code>
+and then turn around and assign that to <code>x_var</code>. But these are all things
+we can continue to work on. (Remember, &ldquo;scaffolding&rdquo;.)</p><hr><p>The new compiler was, after 8 months of spare-time work, finally able to
+pass all the same tests that our original compiler could.
+<a href=https://github.com/natalie-lang/natalie/pull/582 target=_blank rel=noopener>So it replaced the old compiler.</a>
+And there was much rejoicing!</p><p>The new compiler is easier to debug and produces leaner (faster) C++ code.
+I made a video about it!</p><p><p class=markdown-image><img src=/images/compiler2_thumb.png alt="video about the new compiler"></p></p><h2 id=the-future>The Future <a href=#the-future class=anchor>🔗</a></h2><p>Natalie&rsquo;s not &ldquo;done&rdquo; yet&ndash;there&rsquo;s still lots to do in the standard library
+and little edge cases in the compiler. There are tons of optimizations we
+can do in the compiler and the runtime, too. And I would love to get to a
+fully self-hosted state, where end-users don&rsquo;t need an existing Ruby on
+their system to run Natalie. <strong>I will just keep chipping away at it!</strong></p><p><p class=markdown-image><img src=/images/asbury.jpg alt="a walkway lined with pillars, extending into the distance"></p></p><p>This post is long enough, though, so I will end here for now. But I will
+add a little note about the future in general&mldr;</p><p>People drop in <a href=https://discord.gg/hnHp2tdQyn target=_blank rel=noopener>our Discord</a> server fairly
+regularly to ask something like &ldquo;What is the point of this project?&rdquo;
+Usually it&rsquo;s in a nicer tone than that, but that&rsquo;s the gist of the
+question. They want to know why the world needs another Ruby implementation,
+why I (and other friends) would spend time on what could arguably be
+called a novelty. And I think they want to know if it&rsquo;s a &ldquo;real&rdquo; project.</p><p>I used to struggle with this question. I felt the obligation to justify
+the existence of Natalie. I thought that I had to explain to them why
+I&rsquo;m spending my spare time on a project that could quite possibly never
+affect the world and never make money.</p><p>But I made some good friends on the internet who have taught me that
+&ldquo;Just for fun. No, really.&rdquo; is a totally valid answer to such questions.
+Some people don&rsquo;t &ldquo;get&rdquo; that answer, and that&rsquo;s OK. In fact, I get so many
+&ldquo;huh?&ldquo;s that I made a website for it: <a href=https://justforfunnoreally.dev target=_blank rel=noopener>justforfunnoreally.dev</a></p><p>There&rsquo;s tremendous freeing power in those words. Try it! See if you
+can build something so off-the-wall, or difficult, or &ldquo;useless&rdquo; that
+someone asks you &ldquo;But why?&rdquo; Then answer with &ldquo;Just for fun!&rdquo; and see
+how it feels.</p><p>Who knows, maybe you&rsquo;ll end up somewhere cool in the end, even though
+your aim wasn&rsquo;t respected by confused onlookers.</p><p>As my friend Andreas Kling <a href=https://twitter.com/awesomekling/status/1544026282161307648 target=_blank rel=noopener>once said</a>:</p><blockquote><p>Never underestimate the power of a bunch of nerds building something just for fun.</p></blockquote><hr><p>❤️ Thanks for reading!</p></div><div class=tags><a href=https://mpov.timmorgan.org/tags/ruby>ruby</a>
+<a href=https://mpov.timmorgan.org/tags/compiler>compiler</a>
+<a href=https://mpov.timmorgan.org/tags/c++>c++</a></div></section></main><footer id=footer><div class=copyright>© Copyright
+2022
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>
