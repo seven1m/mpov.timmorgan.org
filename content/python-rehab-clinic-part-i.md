@@ -5,7 +5,6 @@ title: Python Rehab Clinic, Part I
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

@@ -5,7 +5,6 @@ title: OneBody Blog
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

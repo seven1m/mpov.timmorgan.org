@@ -5,7 +5,6 @@ title: Ten Rails Tips
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 Here&#39;s my <a href="http://timothymorgan.tadalist.com/lists/public/323610">Ten Rails Tips</a>, expanded a bit to try to explain my thinking...<ol>	<li><b>Scaffolding won&#39;t write your app for you, otherwise DHH would have called it &quot;foundationing&quot;.</b> Too often I see people addicted to the Rails scaffolding feature. I&#39;ve found that it&#39;s often a crutch for actually <i>thinking</i> about the problem at hand. Scaffolding is great for a one-table model, but breaks down quickly when you have has_manys and other such relationships.

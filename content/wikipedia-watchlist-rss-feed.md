@@ -5,7 +5,6 @@ title: Wikipedia Watchlist RSS Feed
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 <i><b> Update: Version 2 is available <a href="http://mpov.wordpress.com/2007/02/19/wikipedia-watchlist-feed-v2/">here</a>.</b></i>Today, I finally got fed up with <a href="http://en.wikipedia.org">Wikipedia</a>'s lack of <a href="http://en.wikipedia.org/wiki/Wikipedia:Watchlist">watchlist</a> feeds, so I wrote a script that generates them.

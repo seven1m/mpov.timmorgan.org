@@ -5,7 +5,6 @@ title: Use a Proc with ActiveRecords' default_scope Method
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

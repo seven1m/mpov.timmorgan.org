@@ -5,7 +5,6 @@ title: Find &amp; Replace in Word with Ruby
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

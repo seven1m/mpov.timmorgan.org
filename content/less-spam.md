@@ -5,7 +5,6 @@ title: Less Spam
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I have an ongoing experiment in which I never empty my Spam folder in Gmail. On the left side of the screen, when I log in, I can see how many spam messages I have. Gmail automatically deletes spam messages over thirty days old, so this is an accurate representation of how many spam messages I get in a given thirty-day period.<div class='p_embed p_image_embed'><img alt="Media_httpstaticflick_qopgf" height="44" src="/images/media_httpstaticflick_qopgf.png.scaled500.png" width="93" /></div>When I first started using Gmail, my spam folder grew quickly to contain over five hundred spam messages! But over the last several months, my spam count has slowly dwindled to 150.

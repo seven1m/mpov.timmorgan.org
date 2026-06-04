@@ -5,7 +5,6 @@ title: What's up with that blog title?
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I wanted to forewarn any readers that this blog is not necessarily politically correct all the time. I don&#39;t consider myself a backwards hick, but I do have some decent opinions about some touchy subjects, some of which may come up from time to time. I don&#39;t apologize.

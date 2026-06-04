@@ -5,7 +5,6 @@ title: ShrinkSafe with Prototype 1.6
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I didn't find this information anywhere, so here it is for the Google archives...

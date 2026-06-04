@@ -5,7 +5,6 @@ title: Switchers
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 Seems everybody who's anybody these days is "switching" from one platform to another. <a href="http://en.wikipedia.org/wiki/Mark_Pilgrim">Mark Pilgrim</a> switched from <a href="http://diveintomark.org/archives/2006/06/02/when-the-bough-breaks">Mac to Linux</a>. <a href="http://en.wikipedia.org/wiki/Jwz">Jamie Zawinski</a> switched from <a href="http://jwz.livejournal.com/494040.html">Linux to Mac</a>. <a href="http://en.wikipedia.org/wiki/Josh_Marshall">Josh Marshall</a> switched from <a href="http://www.talkingpointsmemo.com/archives/007827.php">Windows to Mac</a>. And, well, I can't think of anyone prominent who switched to Windows, but I'm sure everybody's drooling over Vista.

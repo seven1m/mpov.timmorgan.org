@@ -5,7 +5,6 @@ title: Mac Bragging
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I haven't actually <i>done</i> anything with the new Mac, but I've sure had fun doing it! I've been a bit swamped with work lately, so my bandwidth for additional projects is near zero. I've managed to install all the geeky Mac tools and surf the web a lot.

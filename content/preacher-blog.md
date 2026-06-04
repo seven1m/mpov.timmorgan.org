@@ -5,7 +5,6 @@ title: Preacher Blog
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 Greg Pittman, the preaching minister at my church, now has a <a href="http://gregpittman.com" title="Greg Pittman - Blog">blog</a>. I got him set up this weekend, and he's started it off with a great post about our recent prayer week.

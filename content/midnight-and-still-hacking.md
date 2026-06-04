@@ -5,7 +5,6 @@ title: Midnight and Still Hacking
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

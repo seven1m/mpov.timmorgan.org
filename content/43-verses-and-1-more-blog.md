@@ -5,7 +5,6 @@ title: 43 Verses and 1 More Blog
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I launched my most recent pet project: <a href="http://43verses.com" target="_blank">43 Verses</a>.

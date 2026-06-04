@@ -5,7 +5,6 @@ title: Social Networking for Your Church
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

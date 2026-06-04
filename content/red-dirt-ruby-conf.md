@@ -5,7 +5,6 @@ title: Red Dirt Ruby Conf
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

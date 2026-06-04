@@ -5,7 +5,6 @@ title: Ron Paul
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

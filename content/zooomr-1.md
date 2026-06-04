@@ -5,7 +5,6 @@ title: Zooomr
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 <a href="http://zooomr.com">Zooomr</a> is a little photo sharing site that has a wee bit of potential I think. While I wouldn't exactly call it "reliable" at the moment (its recent upgrade took it down for weeks and it's service has been sketchy ever since), I could see it amassing a cult following among geeks like myself.

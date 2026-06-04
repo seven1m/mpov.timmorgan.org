@@ -5,7 +5,6 @@ title: Junk Email Filter Dot Com
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 We just started using an <a href="http://www.junkemailfilter.com/spam/">email filtering service</a> at <a href="http://www.cedarridgecc.com">Cedar Ridge</a>. So far, I'm very pleased with it. In the two days it's been in place, only a handful of spam messages have passed through to our server, and every one of those were filtered by our existing <a href="http://en.wikipedia.org/wiki/DNSBL">DNS blacklist</a> filtering.

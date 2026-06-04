@@ -5,7 +5,6 @@ title: Use rsync instead of cp
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

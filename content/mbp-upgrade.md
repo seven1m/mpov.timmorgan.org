@@ -5,7 +5,6 @@ title: MBP Upgrade
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

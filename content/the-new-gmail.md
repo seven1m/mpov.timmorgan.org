@@ -5,7 +5,6 @@ title: The New Gmail
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 It seems the Gmail team has quietly slipped in a minor upgrade to the revolutionary and still yet after more than 3 years, best web email system I've ever seen. I have to use Outlook at work and yearn for the day that it will properly thread replies as Gmail does, but I digress...

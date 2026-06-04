@@ -5,7 +5,6 @@ title: Snippets Feed
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

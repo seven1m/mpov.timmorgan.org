@@ -5,7 +5,6 @@ title: Ubuntu 7.10 Rocks
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

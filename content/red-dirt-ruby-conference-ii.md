@@ -2,11 +2,9 @@
 date: 2011-04-23
 layout: post
 title: Red Dirt Ruby Conference II
-tags:
-- 
+tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

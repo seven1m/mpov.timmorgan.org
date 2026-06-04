@@ -5,7 +5,6 @@ title: Tulsa Hackathon Kick-off
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

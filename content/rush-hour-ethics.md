@@ -5,7 +5,6 @@ title: Rush-Hour Ethics
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 <div class='p_embed p_image_embed'><img alt="Media_httpstaticflick_hdmac" height="240" src="/images/media_httpstaticflick_hDmAc.jpg.scaled500.jpg" width="170" /></div>Here's a phenomenon that really peeves me. On my way home every weekday, I pass South through these two intersections. During rush-hour, traffic can get quite backed up here, so the wait can easily be ten or fifteen minutes at this one point in my drive home.

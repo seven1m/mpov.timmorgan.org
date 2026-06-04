@@ -5,7 +5,6 @@ title: Git For People Who Know Svn (Things I've Learned, Part 1)
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

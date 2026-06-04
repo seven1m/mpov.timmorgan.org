@@ -5,7 +5,6 @@ title: Install the Ruby gem "dnssd" on Ubuntu
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

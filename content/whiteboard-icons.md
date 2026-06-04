@@ -5,7 +5,6 @@ title: Whiteboard Icons
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 ![Bulb](/images/bulb.jpg)

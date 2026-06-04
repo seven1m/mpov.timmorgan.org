@@ -5,7 +5,6 @@ title: CascadingRubies - Ruby DSL for generating CSS
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I've been working on a little experiment lately... a Ruby <a href="http://martinfowler.com/bliki/DomainSpecificLanguage.html">domain-specific language</a> for generating Cascading Style Sheets called <a href="http://github.com/seven1m/cascading_rubies">CascadingRubies</a>.

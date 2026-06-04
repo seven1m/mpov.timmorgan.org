@@ -8,7 +8,6 @@ tags:
 - rest
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

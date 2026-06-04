@@ -5,7 +5,6 @@ title: Politics and 18-30 Year-Olds
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

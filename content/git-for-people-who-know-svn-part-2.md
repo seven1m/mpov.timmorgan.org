@@ -5,7 +5,6 @@ title: Git For People Who Know Svn, Part 2
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

@@ -5,7 +5,6 @@ title: One (Spotty) Year of MPOV
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I just realized I've now had this blog for one year. While its postings have been sporadic at times, I'm happy to look back on what I've done tech-wise over the last year.

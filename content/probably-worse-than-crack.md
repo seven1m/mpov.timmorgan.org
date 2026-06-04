@@ -5,7 +5,6 @@ title: (Probably) Worse Than Crack
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 Not that I would really know, but I'd imagine hard drugs couldn't be much more addictive than Facebook. I'm still sinking my roots deep into that thing, finding more and more old friends and people I forgot about (sorry; bad memory :-).

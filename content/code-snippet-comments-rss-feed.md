@@ -5,7 +5,6 @@ title: Code Snippet Comments RSS Feed
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 In my quest to make everything into a feed... I present the <a href="http://feed43.com/8055673348816228.xml">Code Snippet Comments feed</a>. It goes with <a href="http://www.bigbold.com/snippets/">this site</a>, which lacks a feed for comments posted on snippets.

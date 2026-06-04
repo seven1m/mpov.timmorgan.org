@@ -8,7 +8,6 @@ tags:
 - programming
 status: publish
 type: post
-published: true
 meta: {}
 ---
 

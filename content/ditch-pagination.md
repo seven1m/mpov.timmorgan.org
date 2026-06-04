@@ -5,7 +5,6 @@ title: Ditch Pagination
 tags: []
 status: publish
 type: post
-published: true
 meta: {}
 ---
 I build web apps. Almost every one has a screen or two somewhere that shows a listing, and at the bottom it has pagination links, e.g. next page, page 3, etc. For a recent app I've been working on, the interface is very search-driven, i.e. the user enters some criteria the results are displayed.
