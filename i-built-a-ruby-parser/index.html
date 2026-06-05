@@ -1,11 +1,18 @@
-<!doctype html><html lang=en-us><head><title>I Built a Ruby Parser | My Point of View</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Sorry, this post will read like a &ldquo;dear diary&rdquo; entry rather than some life-changing HN-worthy guidance.
-Back in November 2020, almost on a whim I started work on a new parser for the Ruby programming language. It was almost exactly a year after I had started working on my compiler project (I hope to write a longer post about that someday soon), and in my frustration with the state of affairs with Ruby parsers available to a humble C/C++ programmer, I decided to see how hard it would be."><meta name=generator content="Hugo 0.101.0"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.png type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<!doctype html><html lang=en-us><head><title>I Built a Ruby Parser | My Point of View</title><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Sorry, this post will read like a &ldquo;dear diary&rdquo; entry rather than some
+life-changing HN-worthy guidance.
+Back in November 2020, almost on a whim I started work on
+a new parser
+for the Ruby programming language. It was almost exactly a year after I had
+started working on my compiler project
+(I hope to write a longer post about that someday soon), and in my frustration
+with the state of affairs with Ruby parsers available to a humble C/C++
+programmer, I decided to see how hard it would be."><meta name=generator content="Hugo 0.162.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.png type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
 <a href=/tags>Tags</a>
 <a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>I Built a Ruby Parser</h1><div class=tip><time datetime="2022-06-04 17:50:00 -0500 -0500">Jun 4, 2022</time>
-<span class=split>·</span>
-<span>779 words</span>
-<span class=split>·</span>
-<span>4 minute read</span></div><div class=content><p><em>Sorry, this post will read like a &ldquo;dear diary&rdquo; entry rather than some
+<span class=split>·
+</span><span>779 words
+</span><span class=split>·
+</span><span>4 minute read</span></div><div class=content><p><em>Sorry, this post will read like a &ldquo;dear diary&rdquo; entry rather than some
 life-changing <a href=https://news.ycombinator.com target=_blank rel=noopener>HN</a>-worthy guidance.</em></p><p>Back in November 2020, almost on a whim I started work on
 <a href=https://github.com/natalie-lang/natalie_parser target=_blank rel=noopener>a new parser</a>
 for the Ruby programming language. It was almost exactly a year after I had
@@ -14,7 +21,7 @@ started working on <a href=https://github.com/natalie-lang/natalie target=_blank
 with the state of affairs with Ruby parsers available to a humble C/C++
 programmer, I decided to see how hard it would be.</p><h2 id=utter-failure>Utter Failure <a href=#utter-failure class=anchor>🔗</a></h2><p>Actually, the story starts about a month earlier when I thought I could make a
 Ruby parser using a Parsing Expression Grammar, which I made
-<a href="https://www.youtube.com/watch?v=5kGcuhDz4JA&list=PLWUx_XkUoGTrZFVEYGh6N7bmC60Eu5tjX" target=_blank rel=noopener>a series of videos about</a>.
+<a href="https://www.youtube.com/watch?v=5kGcuhDz4JA&amp;list=PLWUx_XkUoGTrZFVEYGh6N7bmC60Eu5tjX" target=_blank rel=noopener>a series of videos about</a>.
 That project was a failure. It was slow, buggy&mldr; I mean <strong>very</strong> buggy.
 Also <strong>very</strong> slow. It was clear within a few weeks that it wasn&rsquo;t going to
 be good enough.</p><p>Somehow that experience didn&rsquo;t deter me. It just helped me realize this project
@@ -23,7 +30,7 @@ as I&rsquo;m accustomed to doing.</p><h2 id=learning-stuff>Learning Stuff <a hre
 <a href=https://en.wikipedia.org/wiki/Operator-precedence_parser#Pratt_parsing target=_blank rel=noopener>Pratt parsing</a>
 technique. Even though the book examples were in Go and I was writing C++,
 the technique carried over easily and I was able to get something that
-seemed like it would work for parsing Ruby in a few weeks.</p><p><a href="https://www.youtube.com/watch?v=oyBZD-WXJhc&list=PLWUx_XkUoGTqVaRuvBTrNRifscPrvrjMe" target=_blank rel=noopener>I made some videos</a>.
+seemed like it would work for parsing Ruby in a few weeks.</p><p><a href="https://www.youtube.com/watch?v=oyBZD-WXJhc&amp;list=PLWUx_XkUoGTqVaRuvBTrNRifscPrvrjMe" target=_blank rel=noopener>I made some videos</a>.
 I hacked on my parser off-and-on over the next several months.</p><h2 id=feeling-overwhelmed>Feeling Overwhelmed <a href=#feeling-overwhelmed class=anchor>🔗</a></h2><p><strong>Then I got discouraged.</strong> The amount of work ahead felt overwhelming and
 I wasn&rsquo;t sure if I could do it alone.</p><p>Open source can be a lonely hobby. In some ways, I relish the out-for-a-hike
 alone-ness of working on open source. It&rsquo;s full of personal challenges
@@ -54,5 +61,5 @@ For a real language!</p><p>I&rsquo;m proud of myself. And I hope you find some i
 you&rsquo;ve been meaning to do, too!</p><p>Thanks for reading!</p></div><div class=tags><a href=https://mpov.timmorgan.org/tags/ruby>ruby</a>
 <a href=https://mpov.timmorgan.org/tags/parser>parser</a>
 <a href=https://mpov.timmorgan.org/tags/c++>c++</a></div></section></main><footer id=footer><div class=copyright>© Copyright
-2022
-<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>
+2026
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>

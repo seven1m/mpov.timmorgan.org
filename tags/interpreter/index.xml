@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Interpreter on My Point of View</title><link>https://mpov.timmorgan.org/tags/interpreter/</link><description>Recent content in Interpreter on My Point of View</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 04 Jun 2026 19:25:00 -0500</lastBuildDate><atom:link href="https://mpov.timmorgan.org/tags/interpreter/index.xml" rel="self" type="application/rss+xml"/><item><title>I built a Ruby Interpreter</title><link>https://mpov.timmorgan.org/i-built-a-ruby-interpreter/</link><pubDate>Thu, 04 Jun 2026 19:25:00 -0500</pubDate><guid>https://mpov.timmorgan.org/i-built-a-ruby-interpreter/</guid><description>&lt;p&gt;I love Ruby, but I don&amp;rsquo;t understand how it works. And my biggest character flaw
+is that I can&amp;rsquo;t just read the source, I have to build my own.&lt;/p&gt;
+&lt;p&gt;You can see my previous posts on this subject:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mpov.timmorgan.org/i-built-a-ruby-parser" target="_blank" rel="noopener"&gt;I Built a Ruby Parser&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://mpov.timmorgan.org/i-built-a-ruby-compiler" target="_blank" rel="noopener"&gt;I Built a Ruby Compiler&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Ideally the interpreter would have been in between those two.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;And before you get too far, here&amp;rsquo;s some required background reading:
+&lt;a href="https://justforfunnoreally.dev" target="_blank" rel="noopener"&gt;justforfunnoreally.dev&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="cora"&gt;Cora &lt;a href="#cora" class="anchor"&gt;🔗&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;So me and the clanker have been working on a new Ruby interpreter named
+&lt;a href="https://github.com/seven1m/cora" target="_blank" rel="noopener"&gt;Cora&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,61 @@
+<!doctype html><html lang=en-us><head><title>I built a Ruby Interpreter | My Point of View</title><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="I love Ruby, but I don&rsquo;t understand how it works. And my biggest character flaw
+is that I can&rsquo;t just read the source, I have to build my own.
+You can see my previous posts on this subject:
+
+I Built a Ruby Parser
+I Built a Ruby Compiler
+
+Ideally the interpreter would have been in between those two.
+And before you get too far, here&rsquo;s some required background reading:
+justforfunnoreally.dev
+Cora 🔗So me and the clanker have been working on a new Ruby interpreter named
+Cora."><meta name=generator content="Hugo 0.162.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.png type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>I built a Ruby Interpreter</h1><div class=tip><time datetime="2026-06-04 19:25:00 -0500 -0500">Jun 4, 2026</time>
+<span class=split>·
+</span><span>991 words
+</span><span class=split>·
+</span><span>5 minute read</span></div><div class=content><p>I love Ruby, but I don&rsquo;t understand how it works. And my biggest character flaw
+is that I can&rsquo;t just read the source, I have to build my own.</p><p>You can see my previous posts on this subject:</p><ul><li><a href=https://mpov.timmorgan.org/i-built-a-ruby-parser target=_blank rel=noopener>I Built a Ruby Parser</a></li><li><a href=https://mpov.timmorgan.org/i-built-a-ruby-compiler target=_blank rel=noopener>I Built a Ruby Compiler</a></li></ul><p><em>Ideally the interpreter would have been in between those two.</em></p><p>And before you get too far, here&rsquo;s some required background reading:
+<a href=https://justforfunnoreally.dev target=_blank rel=noopener>justforfunnoreally.dev</a></p><h2 id=cora>Cora <a href=#cora class=anchor>🔗</a></h2><p>So me and the clanker have been working on a new Ruby interpreter named
+<a href=https://github.com/seven1m/cora target=_blank rel=noopener>Cora</a>.</p><p>I talked about this in <a href=/dealing-with-the-hype-cycle-in-my-forties>my last post</a>,
+but the short version is that I wanted to see how far I can push an LLM (several
+different models, actually, more on that in a second) and how in-the-know I can
+remain through the process.</p><p>I.e. is it possible to vibe code my way through a complex project and still be happy
+with the architecture and understand the outcome&mldr;?</p><h2 id=goals>Goals <a href=#goals class=anchor>🔗</a></h2><ul><li>to get most or all of <a href=https://github.com/seven1m/cora target=_blank rel=noopener>ruby/spec</a> passing</li><li>to run real ruby software</li><li>to be reasonably fast enough to be usable</li><li>to experiment with JIT compilation</li><li>to experiment with gradual typing</li><li>to make an architecture I can understand</li><li>to experiment with different LLMs</li><li>to only spend $20/month -ish on AI subscriptions</li></ul><h2 id=anti-goals>Anti-Goals <a href=#anti-goals class=anchor>🔗</a></h2><ul><li>to control every line of code &ndash; the LLM will do things differently than I would, and that&rsquo;s ok</li><li>to be faster or better than MRI &ndash; I just want something I can play with and use myself</li><li>to make any sort of statement &ndash; it&rsquo;s just my sandbox</li><li>to fully delegate to AI</li><li>to throw a bunch of money at the task
+<a href=https://www.anthropic.com/engineering/building-c-compiler target=_blank rel=noopener>like Anthropic did</a></li></ul><h2 id=models>Models <a href=#models class=anchor>🔗</a></h2><p>I&rsquo;ll try to keep this section short, but it&rsquo;s interesting to me and part of the story.</p><p>I started out using Claude Code&rsquo;s $20/month plan. Sonnet 4.5 and 4.6 I believe. Me and Claude worked
+alright together, but I didn&rsquo;t like Claude&rsquo;s &ldquo;personality&rdquo; &ndash; and it felt like it was making decisions
+for me when I didn&rsquo;t ask it to.</p><p>I heard that OpenAI&rsquo;s $20 plan allowed more usage, so I gave it a try and really liked the GPT models.
+GPT-5.3-Codex at first, then GPT-5.4 was the sweet spot. Codex and I knocked out a bunch of the
+interpreter together, and it didn&rsquo;t do more than I asked or leap to conclusions.</p><p>For some of the less foundational work, I tried open weights and other Chinese models via
+<a href=https://openrouter.ai target=_blank rel=noopener>OpenRouter</a> and <a href=https://opencode.ai/go target=_blank rel=noopener>OpenCode Go</a>:</p><ul><li>MiniMax-M2.7</li><li>GLM-5.1</li><li>DeepSeek V4 Pro</li><li>DeepSeek V4 Flash</li></ul><p>The DeepSeek models are surprisingly good! They require more careful code review and hand-holding,
+especially during debugging sessions, but I found that to actually be a <strong>good thing</strong> for my own
+understanding of how the code works.</p><p>I even made a <a href=https://medium.com/@tentenco/what-is-ralph-loop-a-new-era-of-autonomous-coding-96a4bb3e2ac8 target=_blank rel=noopener>Ralph Wiggum loop</a>
+to work on building out the standard library while I slept. The results of that were pretty mixed, and
+I ended up going back and correcting some of that work that didn&rsquo;t land like I wanted. I&rsquo;m not sure if
+I&rsquo;d do that again, honestly.</p><p>To summarize, I really let the <a href="https://www.youtube.com/watch?v=cVUVfn8OF5k" target=_blank rel=noopener>AI Psychosis</a> set it,
+like so many others. :-)</p><h2 id=where-are-we>Where Are We <a href=#where-are-we class=anchor>🔗</a></h2><p>Currently, Cora is passing about 10,000 ruby specs and can run some decently complex ruby software, like:</p><ul><li>rack</li><li>sinatra</li><li>webrick</li><li>rake</li><li>rubygems</li><li>bundler</li></ul><p>There is an experimental Just In Time compiler that I think is exciting. Cora embeds the
+<a href=https://www.bellard.org/tcc/ target=_blank rel=noopener>Tiny C Compiler</a> for the JIT backend, which I think is fun.
+I haven&rsquo;t focused much on the JIT, but hope to play with it more in the coming months.</p><p>And down the road I want to experiment with some sort of gradual typing system. I just saw that
+<a href=https://elixir-lang.org/blog/2026/06/03/elixir-v1-20-0-released/ target=_blank rel=noopener>Elixir now has gradual a type system</a>,
+so maybe that&rsquo;s something to learn from.</p><h2 id=quality>Quality <a href=#quality class=anchor>🔗</a></h2><p>The quality is mixed.</p><p>Some of the code is better than I could have written myself. The textbook algorithmic stuff, the compiler,
+the VM internals&mldr; I&rsquo;m mature enough to admit I couldn&rsquo;t have written that.</p><p>But there are some sloppy bits too: duplicated code, different ways of doing the same thing, stuff that a
+human simply wouldn&rsquo;t do because it requires extra work&mldr; the LLM doesn&rsquo;t hesitate to add code that we
+already have in the project.</p><p>And some of the files are HUGE. This is partly due to Zig and partly because LLMs never struggle with
+scrolling up and down a 10,000-line source file.</p><h2 id=what-i-learned>What I Learned <a href=#what-i-learned class=anchor>🔗</a></h2><p>I chose Zig because I wanted to learn how to write it, but if I&rsquo;m honest, I haven&rsquo;t learned the syntax
+as well as I would have if I were writing the code myself. I know what Zig is capable of, but if someone
+asked me an interview question for Zig job, I don&rsquo;t think I&rsquo;d get the job. This makes me wonder how new
+students will learn programming in the future. I&rsquo;m glad I&rsquo;m not a teacher or college professor.</p><p>I miss debugging. This almost hurts to write, because I always thought of the hours-long or days-long
+debugging sessions where I&rsquo;m agonizing over a segfault, stepping through code, adding <code>printf</code>
+statements, and running the same reproduction over and over, as agonizing. But the payoff when it finally
+clicks and you find the bug&mldr; that is a real dopamine hit. And I miss it. And my understanding of
+certain bugs and architectural flaws is more shallow now.</p><p>Lastly, I realized programming is no less fun &ndash; it&rsquo;s still
+<a href=https://softwarequotes.com/quote/the-programmer--like-the-poet--works-only-slightly target=_blank rel=noopener>building castles in the air</a>.</p><h2 id=the-future>The Future <a href=#the-future class=anchor>🔗</a></h2><p>I now have two Ruby implementations that I both love. One has taken 5+ years of careful and
+painstaking by-hand work. The other I vibe coded over 6 months.</p><p>I expect I&rsquo;ll keep working on both and see what happens.</p><p>If neither of them ever amount to anything useful by anyone but me, I&rsquo;m totally ok with that. I&rsquo;ve already
+learned so much. Ruby is the best programming language, and learning about it has been the highlight of
+my career. &lt;3</p></div><div class=tags><a href=https://mpov.timmorgan.org/tags/ai>ai</a>
+<a href=https://mpov.timmorgan.org/tags/ruby>ruby</a>
+<a href=https://mpov.timmorgan.org/tags/interpreter>interpreter</a>
+<a href=https://mpov.timmorgan.org/tags/jit>jit</a></div></section></main><footer id=footer><div class=copyright>© Copyright
+2026
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>
