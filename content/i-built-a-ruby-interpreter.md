@@ -27,10 +27,8 @@ And before you get too far, here's some required background reading:
 So me and the clanker have been working on a new Ruby interpreter named
 [Cora](https://github.com/seven1m/cora).
 
-I talked about this in [my last post](/dealing-with-the-hype-cycle-in-my-forties),
-but the short version is that I wanted to see how far I can push an LLM (several
-different models, actually, more on that in a second) and how in-the-know I can
-remain through the process.
+I wanted to see how far I can push an LLM (several different models, actually,
+more on that in a second) and how in-the-know I can remain through the process.
 
 I.e. is it possible to vibe code my way through a complex project and still be happy
 with the architecture and understand the outcome...?
