@@ -9,19 +9,17 @@ Ideally the interpreter would have been in between those two.
 And before you get too far, here&rsquo;s some required background reading:
 justforfunnoreally.dev
 Cora 🔗So me and the clanker have been working on a new Ruby interpreter named
-Cora."><meta name=generator content="Hugo 0.162.1"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.png type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+Cora."><meta name=generator content="Hugo 0.163.0"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.png type=image/x-icon></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
 <a href=/tags>Tags</a>
 <a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>I built a Ruby Interpreter</h1><div class=tip><time datetime="2026-06-04 19:25:00 -0500 -0500">Jun 4, 2026</time>
 <span class=split>·
-</span><span>991 words
+</span><span>977 words
 </span><span class=split>·
 </span><span>5 minute read</span></div><div class=content><p>I love Ruby, but I don&rsquo;t understand how it works. And my biggest character flaw
 is that I can&rsquo;t just read the source, I have to build my own.</p><p>You can see my previous posts on this subject:</p><ul><li><a href=https://mpov.timmorgan.org/i-built-a-ruby-parser target=_blank rel=noopener>I Built a Ruby Parser</a></li><li><a href=https://mpov.timmorgan.org/i-built-a-ruby-compiler target=_blank rel=noopener>I Built a Ruby Compiler</a></li></ul><p><em>Ideally the interpreter would have been in between those two.</em></p><p>And before you get too far, here&rsquo;s some required background reading:
 <a href=https://justforfunnoreally.dev target=_blank rel=noopener>justforfunnoreally.dev</a></p><h2 id=cora>Cora <a href=#cora class=anchor>🔗</a></h2><p>So me and the clanker have been working on a new Ruby interpreter named
-<a href=https://github.com/seven1m/cora target=_blank rel=noopener>Cora</a>.</p><p>I talked about this in <a href=/dealing-with-the-hype-cycle-in-my-forties>my last post</a>,
-but the short version is that I wanted to see how far I can push an LLM (several
-different models, actually, more on that in a second) and how in-the-know I can
-remain through the process.</p><p>I.e. is it possible to vibe code my way through a complex project and still be happy
+<a href=https://github.com/seven1m/cora target=_blank rel=noopener>Cora</a>.</p><p>I wanted to see how far I can push an LLM (several different models, actually,
+more on that in a second) and how in-the-know I can remain through the process.</p><p>I.e. is it possible to vibe code my way through a complex project and still be happy
 with the architecture and understand the outcome&mldr;?</p><h2 id=goals>Goals <a href=#goals class=anchor>🔗</a></h2><ul><li>to get most or all of <a href=https://github.com/seven1m/cora target=_blank rel=noopener>ruby/spec</a> passing</li><li>to run real ruby software</li><li>to be reasonably fast enough to be usable</li><li>to experiment with JIT compilation</li><li>to experiment with gradual typing</li><li>to make an architecture I can understand</li><li>to experiment with different LLMs</li><li>to only spend $20/month -ish on AI subscriptions</li></ul><h2 id=anti-goals>Anti-Goals <a href=#anti-goals class=anchor>🔗</a></h2><ul><li>to control every line of code &ndash; the LLM will do things differently than I would, and that&rsquo;s ok</li><li>to be faster or better than MRI &ndash; I just want something I can play with and use myself</li><li>to make any sort of statement &ndash; it&rsquo;s just my sandbox</li><li>to fully delegate to AI</li><li>to throw a bunch of money at the task
 <a href=https://www.anthropic.com/engineering/building-c-compiler target=_blank rel=noopener>like Anthropic did</a></li></ul><h2 id=models>Models <a href=#models class=anchor>🔗</a></h2><p>I&rsquo;ll try to keep this section short, but it&rsquo;s interesting to me and part of the story.</p><p>I started out using Claude Code&rsquo;s $20/month plan. Sonnet 4.5 and 4.6 I believe. Me and Claude worked
 alright together, but I didn&rsquo;t like Claude&rsquo;s &ldquo;personality&rdquo; &ndash; and it felt like it was making decisions
